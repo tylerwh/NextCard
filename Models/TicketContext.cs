@@ -17,6 +17,9 @@ namespace NextCard.Models
                 new Status { StatusId = 3, Name = "Quality Assurance"},
                 new Status { StatusId = 4, Name = "Done"}
                 );
+            modelBuilder.Entity<Sprint>().HasData(
+                new Sprint { SprintId = 1, Name = "Sprint-1"}
+            );
         }
     }
 }

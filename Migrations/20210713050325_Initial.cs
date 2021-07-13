@@ -38,30 +38,32 @@ namespace NextCard.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
                     PointValue = table.Column<int>(nullable: false),
-                    StatusId = table.Column<string>(nullable: true),
-                    StatusId1 = table.Column<int>(nullable: true),
-                    SprintId = table.Column<string>(nullable: true),
-                    SprintId1 = table.Column<int>(nullable: true)
+                    StatusId = table.Column<int>(nullable: false),
+                    SprintId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tickets_Sprints_SprintId1",
-                        column: x => x.SprintId1,
+                        name: "FK_Tickets_Sprints_SprintId",
+                        column: x => x.SprintId,
                         principalTable: "Sprints",
                         principalColumn: "SprintId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tickets_Statuses_StatusId1",
-                        column: x => x.StatusId1,
+                        name: "FK_Tickets_Statuses_StatusId",
+                        column: x => x.StatusId,
                         principalTable: "Statuses",
                         principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Sprints",
+                columns: new[] { "SprintId", "Name" },
+                values: new object[] { 1, "Sprint-1" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
@@ -75,14 +77,14 @@ namespace NextCard.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_SprintId1",
+                name: "IX_Tickets_SprintId",
                 table: "Tickets",
-                column: "SprintId1");
+                column: "SprintId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_StatusId1",
+                name: "IX_Tickets_StatusId",
                 table: "Tickets",
-                column: "StatusId1");
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
