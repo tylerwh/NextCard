@@ -11,9 +11,11 @@ namespace NextCard.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter a description.")]
+        [StringLength(75, ErrorMessage ="Description must not exceed 75 characters.")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter points.")]
+        [Range(1, 13, ErrorMessage = "Points must be between 1 and 13.")]
         public int PointValue { get; set; }
 
         [Required(ErrorMessage = "Please select a status.")]

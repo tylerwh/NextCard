@@ -2,13 +2,14 @@
 
 <h2>New Card</h2>
 
-<div asp-validation-summary="All" class="text-danger"></div>
-
 <form asp-action="Add" method="post">
 
     <div class="form-group">
         <label asp-for="CurrentTicket.Description">Description:</label>
         <input type="text" asp-for="CurrentTicket.Description" class="form-control">
+    </div>
+    <div class="col">
+        <span asp-validation-for="CurrentTicket.Description" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -18,10 +19,17 @@
             <option value=""></option>
         </select>
     </div>
+    <!--Will want to add a link here to "add new sprint"-->
+    <div class="col">
+        <span asp-validation-for="CurrentTicket.SprintId" class="text-danger"></span>
+    </div>
 
     <div class="form-group">
         <label asp-for="CurrentTicket.PointValue">Points:</label>
         <input type="text" asp-for="CurrentTicket.PointValue" class="form-control">
+    </div>
+    <div class="col">
+        <span asp-validation-for="CurrentTicket.PointValue" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -30,6 +38,9 @@
                 asp-items="@(new SelectList(Model.Statuses, "StatusId", "Name"))">
             <option value=""></option>
         </select>
+    </div>
+    <div class="col">
+        <span asp-validation-for="CurrentTicket.StatusId" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Add</button>
